@@ -2195,12 +2195,12 @@ bool skipTLSextension(struct ndpi_detection_module_struct *ndpi_struct,
 
   if(ndpi_struct->cfg.tls_ja_ignore_ephemeral_extensions) {
     switch(extension_id) {
+    case 0x0a: /* Supported groups          */
+    case 0x15: /* padding        - RFC 7685 */
     case 0x23: /* session ticket - RFC 9149 */
     case 0x29: /* pre-shared key - RFC 8446 */
-    case 0x15: /* padding        - RFC 7685 */
-      /* Noisy extensions */
+    case 0x2a: /* early data     - RFC 8446 */
     case 0x2b: /* Supported TLS versions    */
-    case 0x0a: /* Supported groups          */
       return(true);
     }
   }
